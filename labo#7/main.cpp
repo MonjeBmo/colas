@@ -17,6 +17,9 @@ void printCola(ptrNodoCola ptrA);
 void add(ptrNodoCola *ptrHead, ptrNodoCola *ptrTalon, char value);
 void searchCola(ptrNodoCola ptrA, char value);
 char removeElement(ptrNodoCola *ptrHead, ptrNodoCola *ptrTalon);
+int countElement(ptrNodoCola ptrA);
+void deleteElementAllOrNot(ptrNodoCola *ptrHead, ptrNodoCola *ptrTalon, int cant);
+
 void instruction(void);
 
 // Laboratorio #7
@@ -54,6 +57,12 @@ int main()
             cout << "\n\nElemento removido! -> " << element << endl;
             cout << "Elementos Restantes -> \n";
             printCola(ptrHead);
+            break;
+        case 5:
+            int x;
+            cout << "Introduzca un caracter : ";
+            cin >> x;
+            deleteElementAllOrNot(&ptrHead, &ptrTalon, x);
             break;
         default:
             cout << "Eleccion no Valida";
@@ -163,11 +172,13 @@ void searchCola(ptrNodoCola ptrA, char value)
         }
         if (tmp == '\0')
         {
-            cout << "No se Encontro " << endl << endl;
+            cout << "No se Encontro " << endl
+                 << endl;
         }
         else
         {
-            cout << "\nEl elemento es : " << tmp << "\nPosicion exacta: " << i << endl << endl;
+            cout << "\nEl elemento es : " << tmp << "\nPosicion exacta: " << i << endl
+                 << endl;
         }
     }
 }
@@ -187,4 +198,40 @@ char removeElement(ptrNodoCola *ptrHead, ptrNodoCola *ptrTalon)
 
     free(tempPtr);
     return value;
+}
+
+int countElement(ptrNodoCola ptrA)
+{
+    int i = 0;
+    while (ptrA != NULL)
+    {
+        ptrA = ptrA->ptr_S;
+        i += 1;
+    }
+    return i;
+}
+
+void deleteElementAllOrNot(ptrNodoCola *ptrHead, ptrNodoCola *ptrTalon, int cant)
+{
+    int elements = countElement(*ptrHead); // contar los elementos en la cola
+    if (elements == 0)
+    {
+        cout << "La cola esta vacia" << endl;
+        return;
+    }
+    if (cant <= 0 || cant >= 16)
+    {
+        cout << "La cantidad debe ser mayor que 0 o menor a 15" << endl;
+        return;
+    }
+    if (cant > elements)
+    {
+        cant = elements;
+        cout << "Se eliminara toda la cola que tiene " << elements << " elementos" << endl;
+    }
+    for (int i = 0; i < cant; i++)
+    {
+        char eliminado = removeElement(ptrHead, ptrTalon); // eliminar un elemento de la cola
+    }
+    printCola(*ptrHead);
 }
