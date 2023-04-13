@@ -15,6 +15,7 @@ typedef NodoCola *ptrNodoCola;
 
 void printCola(ptrNodoCola ptrA);
 void add(ptrNodoCola *ptrHead, ptrNodoCola *ptrTalon, char value);
+void searchCola(ptrNodoCola ptrA, char value);
 void instruction(void);
 
 // Laboratorio #7
@@ -42,7 +43,11 @@ int main()
         case 2:
             printCola(ptrHead);
             break;
-
+        case 3:
+            cout << "Introduzca un caracter : ";
+            cin >> element;
+            searchCola(ptrHead, element);
+            break;
         default:
             cout << "Eleccion no Valida";
             break;
@@ -101,8 +106,11 @@ void add(ptrNodoCola *ptrHead, ptrNodoCola *ptrTalon, char value)
             cout << "no se incerto " << value << "No hay memoria disponible";
         }
     }
+    else
+    {
 
-    cout << "\nNO es un digito!\n";
+        cout << "\nNO es un digito!\n";
+    }
 }
 
 void printCola(ptrNodoCola ptrA)
@@ -122,5 +130,37 @@ void printCola(ptrNodoCola ptrA)
         }
 
         cout << "NULL\n\n";
+    }
+}
+
+void searchCola(ptrNodoCola ptrA, char value)
+{
+    if (isEmpty(ptrA))
+    {
+        cout << "\nLa lista esta vacia!\n";
+    }
+    else
+    {
+        char tmp;
+        int i = 1;
+        while (ptrA != NULL)
+        {
+            
+            if (value == ptrA->dato)
+            {
+                tmp = ptrA->dato;
+                break;
+            }
+            ptrA = ptrA->ptr_S;
+            i+=1;
+        }
+        if (tmp == '\0')
+        {
+            cout << "No se Encontro";
+        }
+        else
+        {
+            cout << "\nEl elemento es : " << tmp << "\nPosicion exacta: " << i << endl;
+        }
     }
 }
