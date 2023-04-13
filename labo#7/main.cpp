@@ -163,11 +163,11 @@ void searchCola(ptrNodoCola ptrA, char value)
         }
         if (tmp == '\0')
         {
-            cout << "No se Encontro";
+            cout << "No se Encontro " << endl << endl;
         }
         else
         {
-            cout << "\nEl elemento es : " << tmp << "\nPosicion exacta: " << i << endl;
+            cout << "\nEl elemento es : " << tmp << "\nPosicion exacta: " << i << endl << endl;
         }
     }
 }
