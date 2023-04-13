@@ -16,6 +16,7 @@ typedef NodoCola *ptrNodoCola;
 void printCola(ptrNodoCola ptrA);
 void add(ptrNodoCola *ptrHead, ptrNodoCola *ptrTalon, char value);
 void searchCola(ptrNodoCola ptrA, char value);
+char removeElement(ptrNodoCola *ptrHead, ptrNodoCola *ptrTalon);
 void instruction(void);
 
 // Laboratorio #7
@@ -47,6 +48,12 @@ int main()
             cout << "Introduzca un caracter : ";
             cin >> element;
             searchCola(ptrHead, element);
+            break;
+        case 4:
+            element = removeElement(&ptrHead, &ptrTalon);
+            cout << "\n\nElemento removido! -> " << element << endl;
+            cout << "Elementos Restantes -> \n";
+            printCola(ptrHead);
             break;
         default:
             cout << "Eleccion no Valida";
@@ -145,14 +152,14 @@ void searchCola(ptrNodoCola ptrA, char value)
         int i = 1;
         while (ptrA != NULL)
         {
-            
+
             if (value == ptrA->dato)
             {
                 tmp = ptrA->dato;
                 break;
             }
             ptrA = ptrA->ptr_S;
-            i+=1;
+            i += 1;
         }
         if (tmp == '\0')
         {
@@ -163,4 +170,21 @@ void searchCola(ptrNodoCola ptrA, char value)
             cout << "\nEl elemento es : " << tmp << "\nPosicion exacta: " << i << endl;
         }
     }
+}
+
+char removeElement(ptrNodoCola *ptrHead, ptrNodoCola *ptrTalon)
+{
+    char value;
+    ptrNodoCola tempPtr;
+    value = (*ptrHead)->dato;
+    tempPtr = *ptrHead;
+    *ptrHead = (*ptrHead)->ptr_S;
+
+    if (*ptrHead == NULL)
+    {
+        *ptrTalon = NULL;
+    }
+
+    free(tempPtr);
+    return value;
 }
